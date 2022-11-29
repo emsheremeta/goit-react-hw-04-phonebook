@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import styles from './Phonebook.module.css';
 
-function Form (props) {
+function Form(props) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -31,10 +33,10 @@ function Form (props) {
 
   return (
     <div>
-      <form className="Phonebook__form" onSubmit={onSubmit}>
-        <label className="Phonebook__label">Name</label>
+      <form className={styles.form} onSubmit={onSubmit}>
+        <label className={styles.label}>Name</label>
         <input
-          className="Phonebook__input"
+          className={styles.input}
           size={35}
           placeholder="Put your name here"
           onChange={onChangeName}
@@ -46,9 +48,9 @@ function Form (props) {
           required
         />
 
-        <label className="Phonebook__label">Number</label>
+        <label className={styles.label}>Number</label>
         <input
-          className="Phonebook__input"
+          className={styles.input}
           size={35}
           placeholder="Put your number here"
           onChange={onChangeNumber}
@@ -60,7 +62,7 @@ function Form (props) {
           required
         />
 
-        <button className="Phonebook__button" onClick={onSubmit}>
+        <button className={styles.button} onClick={onSubmit}>
           Add Contact
         </button>
       </form>
@@ -69,6 +71,10 @@ function Form (props) {
 }
 
 export default Form;
+
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 // OLD VERSION
 

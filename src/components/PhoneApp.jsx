@@ -1,7 +1,7 @@
 import ContactFilter from './phonebook/ContactFilter';
 import Form from './phonebook/Form';
 import { nanoid } from 'nanoid';
-import './phonebook/Phonebook.css';
+import styles from './phonebook/Phonebook.module.css';
 import ContactList from './phonebook/ContactList';
 import { useEffect, useState } from 'react';
 
@@ -52,21 +52,27 @@ function PhoneApp() {
     }
   };
 
-  const onDelete = event => {
-    const id = event.target.parentElement.id;
+  const onDelete = id => {
     setContacts(contacts.filter(contact => contact.id !== id));
   };
+
+  const getFilteredContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   return (
     <div>
-      <h1 className="Phonebook__text">Phonebook</h1>
+      <h1 className={styles.text}>Phonebook</h1>
 
       <Form onSubmit={onSubmit}></Form>
 
-      <h2 className="Phonebook__text__contacts">Contacts</h2>
+      <h2 className={styles.contactText}>Contacts</h2>
 
       <ContactFilter filter={filter} onChange={onChange}></ContactFilter>
       <ContactList
-        contacts={contacts}
+        contacts={getFilteredContacts()}
         filter={filter}
         onDelete={onDelete}
       ></ContactList>
